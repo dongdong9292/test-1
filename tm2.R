@@ -27,11 +27,13 @@ result = as.data.frame(result)
 result
 
 
-windowsFonts(lett=windowsFont("휴먼옛체"))
-wordcloud(result$words, result$Freq, 
+windowsFonts(lett=windowsFont("궁서체"))
+png(filename="wc.png", height=400, width=700, bg="white") # 출력을 png파일로 설정
+
+wordcloud(result$words, result$Freq, family = "lett",
           min.freq = 2, 
           random.order = FALSE, 
-          rot.per = 0.5, scale = c(15, 1), 
-          colors = rainbow(20))
+          rot.per = 0.5, scale = c(5, 1), 
+          colors = rainbow(20),random.color = T)
 
 dev.off()

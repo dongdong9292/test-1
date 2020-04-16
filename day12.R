@@ -92,7 +92,7 @@ wordcloud(words$keyword, words$freq,
 # 만약에 값을 8정도로 주고 
 wordcloud2(words, fontFamily = "휴먼옛체")
 wordcloud2(words,rotateRatio = 1)
-wordcloud2(words,rotateRatio = 0.5)
+wordcloud2(words,rotateRatio = 0.5) # 글씨 눌렀을 때, 클릭 이벤트 등록할 수 있음.
 wordcloud2(words,rotateRatio = 0)
 wordcloud2(words,size=0.5,col="random-dark")
 wordcloud2(words,size=0.5,col="random-dark", figPath="book/peace.png")
@@ -104,8 +104,14 @@ wordcloud2(data = demoFreq, shape = 'cardioid')
 wordcloud2(data = demoFreq, shape = 'triangle-forward')
 wordcloud2(data = demoFreq, shape = 'triangle')
 result<-wordcloud2(data = demoFreq, shape = 'pentagon')
+# web에서 쓸거아니면 의미 없음.. 이미지로 할거면 의미없음..
+# 이미지 클릭 액션은 따로 처리할수 없음
+# 이미지로 저장 워드 클라우드 1
+# 동적으로 웹상 처리를 하려면 워드 클라우드 2 
 library("htmlwidgets")
+# 결과를 html로 만드는 애들의 도우미 패키지
 saveWidget(result,"tmpwc.html",selfcontained = F)
+#selfcontained를 F로 주면 workingdirectory로 가보면tmpwc.html이 만들어져 있을거임. 폴더도 .
 head(demoFreq)
 str(demoFreq)
 
