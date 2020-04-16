@@ -27,7 +27,7 @@ word_data
 
 word_data2 <- sapply(word_data, extractNoun, USE.NAMES = F)
 word_data2
-word_data3 <- extractNoun(word_data) 
+word_data3 <- extractNoun(word_data)  # 명사만 추출하기
 # sapply 안쓰고 extractNoun 사용해도 됨.
 word_data3
 
@@ -71,11 +71,25 @@ head(words)
 ?windowsFonts
 windowsFonts(lett=windowsFont("휴먼옛체"))
 wordcloud(words$keyword, words$freq,family="lett")
+# family 매개변수로 폰트 지정할 수 있음. window 폰트 리턴값을 가지고 할 수 있음.
+# 첫 아규먼트로 텍스트 벡터, 2번째 아규먼트로 숫자 벡터줌
 wordcloud(words$keyword, words$freq, 
           min.freq = 2, 
           random.order = FALSE, 
-          rot.per = 0.3, scale = c(4, 1), 
+          rot.per = 0.5, scale = c(4, 1), 
           colors = rainbow(7))
+# 레인보우 팔레트 7개 넣어서 컬러풀함.
+# www가 제일작게 출력
+# 가로 출력이 더 많음.
+# rot.per 을 0으로주고 실행하면 로테이션 퍼센테이지는 0.0이야.. 원래 가로 출력이 기본인데
+# 로테이션을 줘서 세로로 출력하게 끔.
+# min.freq 은 최소 개수가 2 이상인 애만 출력하겠다.
+# random.order 는 TRUE는 로테이션 랜덤 누가 나오는지 랜덤 .. 크기와 칼라는 고정.
+# FALSE는 가장 큰 값을 가운데 다음 단어는 다음 순으로 밀려남..
+# 벡터로 하나하나 칼라 이름 지정해도 됨.
+# rainbow는 16진수 RGB 연습...
+# scale 은 출력되는 폰트의 크기를 말함. 최대 크기는 4이고 1 씩 줄여나가겠다라는 뜻.
+# 만약에 값을 8정도로 주고 
 wordcloud2(words, fontFamily = "휴먼옛체")
 wordcloud2(words,rotateRatio = 1)
 wordcloud2(words,rotateRatio = 0.5)
