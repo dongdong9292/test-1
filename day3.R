@@ -1,0 +1,398 @@
+f#LIST
+v<-c(1,2,3)
+# 벡터를 만들 때 대표 함수는 C
+l<-list(1,2,3) 
+# 리스트를 만들 때 대표 함수는 list
+
+
+# v*3
+# l*3 리스트는 포장되서 들어가 있기 때문에 에러 발생.
+# 연산을 하고 싶을 때는 unlist를 통해 해제하고, 연산 실행.
+
+v
+l
+v[1] # v[1]*3 가능
+l[1] # 포장된채로 꺼냄 l[1]*3 에러 발생
+l[[1]] # 포장을 꺼낸 채로 l[[1]]*3 가능
+
+lds <- list(1,2,3) 
+lds
+lds+100
+unlist(lds)
+unlist(lds)+100
+lds[1]
+#lds[[1]]
+lds[1]+10
+lds[[1]]+10
+
+names(lds) <- LETTERS[1:3] # 겹대괄호에 ABC를 줌
+lds
+lds[[2]]
+lds[["B"]]
+lds$B # 제일 많이 씀.
+
+
+
+
+a<-list(
+  a = 1:3,
+  b = "a string",
+  c = pi,
+  d = list(-1,-5)
+) # 네임드 리스트임.. 1:3, "a string", pi, list(-1,-5) 로 주면 네임 없음.
+
+
+
+
+a[1]
+a[[1]] # a[["a"]]
+a$a
+a[[1]][1]
+a$a[1]
+a[1]+1
+a[[1]]+1
+a[[1]][2] <- 100
+new_a <- unlist(a[1])
+a[1]; new_a
+names(a) <- NULL
+names(new_a) <- NULL
+
+
+
+ls()
+length(ls())
+save(list=ls(),file="all.rda") # varience will save in "all.rda" of rexam
+# ls 함수의 결과.. 지금까지 만들어진 모든 객체의 이름을 list로
+# all.rda라는 파일로 저장하겠다.
+rm(list=ls())
+ls()
+load("all.rda")
+ls()
+
+#read file data
+nums <- scan("data/sample_num.txt")
+word_ansi <- scan("data/sample_ansi.txt",what="")
+# what이라는 매개변수를 추가해서 읽어들이면 됨.
+# what : 숫자데이터만 읽을 수 있는데, 문자데이터를 넣으면 에러가 남. 그때, what을 넣어주면 해결됨.9
+words_utf8 <- scan("data/sample_utf8.txt", what="",encoding="UTF-8")
+words_utf8_new <- scan("data/sample_utf8.txt", what="")
+# scan은 숫자를 읽어들이는데 특화된 애임. 
+# 주기적으로 변화되는 온도의 수치데이터를 파일에 잔뜩 넣어놨을때 스캔함수를 통해 읽어들이면 됨.
+# 
+
+lines_ansi <- readLines("data/sample_ansi.txt")
+#readLines 일반 텍스트 파일 일정한 규격없을 때는 행단위로 읽는게 일반적임.
+lines_utf8 <- readLines("data/sample_utf8.txt",encoding="UTF-8")
+# encoding을 따로 하지 않으면 기본은 nc임..
+# utf-8은 반드시 대문자로 줘야 함.
+# 대문자로 구성된 인코딩을 구성해야 한다.
+# readLines는 텍스트 파일의 내용을 횡단위로 읽어서 케릭터 벡터를 만드는 애임. (UTF-8로 만들어진 문서를 읽을때는 
+# 반드시 UTF-8을 지정해줘야 함.)
+
+df2 <- read.table("data/product_click.log")
+str(df2)
+head(df2)
+summary(df2$V2)
+# read는 제목행 없도록 처리하는게 우선임. v1,v2로 처리
+
+for(data in month.name) 
+  print(data, quote=T)
+# print는 default quote 값이 T임.
+
+for(data in month.name) 
+  cat(data)
+
+
+
+
+sum <- 0
+for(i in 5:15){
+  if(i%%10==0){
+    break
+  }
+  sum <- sum + i
+  print(paste(i,":",sum)) # print는 기본적으로 몇번째 인덱스인지 알려줌.
+  #cat(i,":",sum,"\n") # 
+}
+
+
+sum <-0
+for(i in 5:15){
+  if(i%%10==0){
+    next;  #continue
+  }
+  sum <- sum + i
+  print(paste(i,":",sum))
+}
+
+sumNumber <- 0
+while(sumNumber <= 20) { 
+  i <- sample(1:5, 1) 
+  sumNumber <-sumNumber+i; 
+  cat(sumNumber,"\n")
+} 
+
+repeat {
+  cat("ㅋㅋㅋ\n")
+}
+
+
+sumNumber <- 0
+repeat { 
+  i <- sample(1:5, 1) 
+  sumNumber <-sumNumber+i; 
+  cat(sumNumber,"\n")
+  if(sumNumber > 20)
+    break;
+}
+
+
+#----------------------------------------------------------------------------------------------------------------
+
+
+
+#제어문
+#if else
+randomNum <-sample(1:10,1)
+if(randomNum>5){
+  cat(randomNum,":5보다 크군요","\n")
+}else{
+  cat(randomNum,":5보다 작거나 같군요","\n")
+}
+
+if(randomNum%%2 == 1){
+  cat(randomNum,";홀수\n")
+}else{
+  cat(randomNum,";짝수","\n")
+}
+
+
+if(randomNum%%2 == 1){
+  cat(randomNum,";홀수","\n")
+}else{
+  cat(randomNum,";짝수","\n")
+}
+
+score <- sample(0:100, 1)  # 0~100 숫자 한 개를 무작위로 뽑아서
+if (score >=90){
+  cat(score,"는 A등급입니다","\n")
+}else if (score >=80){
+  cat(score,"는 B등급입니다","\n")
+}else if (score >=70){
+  cat(score,"는 C등급입니다","\n")
+}else if (score >=60){
+  cat(score,"는 D등급입니다","\n")
+}else {
+  cat(score,"는 F등급입니다","\n")
+}
+#-----------------------------------------------------------------------------------------------------------
+#for문
+#for 실습
+for(data in month.name) 
+  print(data)
+for(data in month.name)print(data);print("ㅋㅋ")
+for(data in month.name){print(data);print("ㅋㅋ")}
+
+for(n in 1:5)
+  cat("hello?","\n")
+
+for(i in 1:5){
+  for(j in 1:5){
+    cat("i=",i,"j=",j,"\n")
+  }
+}
+# 구구단
+for(dan in 1:9){
+  for(num in 1:9){
+    cat(dan,"x",num,"=",dan*num,"\t") # \n : 개행문자, \t : 탭문자
+  }
+  cat("\n")
+}
+
+
+bb <- F
+for(i in 1:9){
+  for(j in 1:9){
+    if(i*j>30){
+      bb<-T
+      break
+    } 
+    cat(i,"*",j,"=",i*j,"\t")
+  }
+  cat("\n")
+  if(bb) #bb가 TRUE이면
+    break
+}
+
+#while문
+i<-1
+while(i <= 10){
+  cat(i,"\n")
+  i <- i+1
+}
+cat("종료 후 :",i,"\n")
+
+i<-1
+while (i<=10) {
+  cat(i,"\n")
+}
+
+i<-1
+while (i<=10) {
+  cat(i,"\n")
+  i<-i+2
+}
+
+i<-1
+while (i<=10) {
+  cat(i,"\n")
+  i<-i+1
+}
+
+#switch 문을 대신하는 함수
+month <- sample(1:12,1)
+month <- paste(month,"월",sep="") # "3월"  "3 월"
+result <- switch(EXPR=month,
+                 "12월"=,"1월"=,"2월"="겨울", 
+                 "3월"=,"4월"=,"5월"="봄",
+                 "6월"=,"7월"=,"8월"="여름",
+                 "가을")
+# 12, 1, 2 => 겨울
+# 3, 4, 5 => 봄
+# 6, 7, 8 => 가을
+# 나머지 가을
+cat(month,"은 ",result,"입니다\n",sep="")
+
+num <- sample(1:10,1)
+num
+switch(EXPR = num,"A","B","C","D")
+
+
+for(num in 1:10){
+  cat(num,":",switch(EXPR = num,"A","B","C","D"),"\n")
+}
+# 무조건 1,2,3,4,5,6,...,10 이므로 ABCD만 나옴
+
+for(num in 1:10){
+  num <- as.character(num)
+  cat(num,":",switch(EXPR = num,
+                     "7"="A","8"="B","9"="C","10"="D","ㅋ"),"\n")
+}
+# 이럴때는 뉴머릭으로 비교값 안됨.
+# 캐릭터로 바꾸면 비교값 가능
+# as.character로 바꿔서 가능~~
+# cat이 횡단위로 출력되려면 백슬레쉬 n이 필요함. 
+
+
+
+
+#---------------------------------------------------------------------------------------------------------------
+
+# 함수 정의와 활용
+
+func1 <- function() {
+  xx <- 10   # 지역변수
+  yy <- 20
+  return(xx*yy)
+}
+func1()
+
+
+result <- func1()
+result
+xx  # 오류발생
+
+
+func2 <- function(x,y) {
+  xx <- x
+  yy <- y
+  return(sum(xx, yy))
+}
+
+func2()
+func2(5,6) # 식 : 연산식, 호출식, 변수, 리터럴
+
+func3 <- function(x,y) {
+  #x3 <- x+1
+  #y3 <- y+1
+  x4 <- func2(x+1, y+1)  # 값(식) : 변수, 리터럴, 연산식, 호출식
+  return(x4)
+}
+
+
+func3(9, 19)  # 30
+
+func4 <- function(x=100, y=200, z) {
+  return(x+y+z)
+}
+func4()
+func4(10,20,30)
+func4(x=1,y=2,z=3)
+func4(y=11,z=22,x=33)
+func4(z=1000)  
+
+#--------------------------------------------------------------------------------------------------------------
+
+# 쉬트에 있는 함수 코드
+f1 <- function() print("TEST")
+f1()
+r <- f1()
+r
+f2 <- function(num) {print("TEST"); print(num) }
+f2(100)
+f2()
+f3<- function (p="R") print(p)
+f3()
+f3(p="PYTHON")
+f3("java")
+f4<- function (p1="ㅋㅋㅋ",p2) for(i in 1:p2) print(p1)
+f4(p1="abc", p2=3)
+f4("abc", 3) 
+f4(5) 
+f4(p2=5) 
+f5<- function(...) { print("TEST"); data <- c(...); print(length(data))}
+f5(10, 20, 30)
+f5("abc", T, 10, 20)
+f6<- function(...) {
+  print("수행시작")
+  data <- c(...)
+  for(item in data) {
+    print(item)
+  }
+  return(length(data))
+}
+f6() # 리턴값인 0만 호출 됨.
+f6(10)
+f6(10,20)
+f6(10,20,30)
+f6(10,'abc', T, F)
+
+f7<- function(...) {
+  data <- c(...)
+  sum <- 0;
+  for(item in data) {
+    if(is.numeric(item))
+      sum <- sum + item
+    else
+      print(item)
+  }
+  return(sum)
+}
+f7(10,20,30)
+f7(10,20,'test', 30,40)
+
+f8<- function(...) {
+  data <- list(...)
+  sum <- 0;
+  for(item in data) {
+    if(is.numeric(item))
+      sum <- sum + item
+    else
+      print(item)
+  }
+  return(sum)
+}
+
+f8(10,20,30)
+f8(10,20,"test", 30,40)
+

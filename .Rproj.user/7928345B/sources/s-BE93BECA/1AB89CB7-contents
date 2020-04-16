@@ -1,0 +1,18 @@
+install.packages("RSelenium")
+library(RSelenium)
+remDr <- remoteDriver(remoteServerAddr = "localhost" , port = 4445, browserName = "chrome")
+
+remDr$open()
+url<-'https://www.istarbucks.co.kr/store/store_map.do?disp=locale'
+remDr$navigate(url)
+Sys.sleep(3)
+
+doms1 <- remDr$findElements(using = "css selector", "#container > div > form > fieldset > div > section > article.find_store_cont >article > 
+                           article:nth-child(4) > div.loca_step1 > div.loca_step1_cont > ul > li:nth-child(1) > a")
+
+sapply(doms,function(x){x$clickElement()})  
+Sys.sleep(1)
+try(doms2 <- remDr$findElements(using = "css selector", "#mCSB_2_container > ul > li:nth-child(1) > a"))
+sapply(doms,function(x){x$clickElement()})
+Sys.sleep(1)
+
